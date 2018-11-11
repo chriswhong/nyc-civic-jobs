@@ -16,13 +16,14 @@ export default class IndexPage extends React.Component {
   }
   
   componentDidMount() {
-    fetch(`http://localhost:3000/jobs/agency/`)
+    fetch(`http://localhost:3000/jobs/`)
       .then(res => res.json())
       .then(
-        (agencies) => {
+        ({agencies, categories}) => {
           this.setState({
             isLoaded: true,
-            agencies
+            agencies,
+            categories
           });
         },
         // Note: it's important to handle errors here
@@ -38,20 +39,44 @@ export default class IndexPage extends React.Component {
   }
   
   render() {
-    const { error, isLoaded, agencies } = this.state;
+    const { error, isLoaded, agencies, categories } = this.state;
     if (error) {
       return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
       return <div>Loading...</div>;
     } else {
       return (
-        <ul>
-          {agencies.map(agency => (
-            <li key={agency._id}>
-              <Link to={`agency/${agency._id}`}>{agency._id} ({agency.count})</Link>
-            </li>
-          ))}
-        </ul>
+        <Layout>
+          <div className="row">
+            <div className="col-md-6">
+              <h4>By Agency</h4>
+              <ul className="list-group">
+                {agencies.map(agency => (
+                  
+                  <Link to={`agency/${agency._id}`} key={agency._id} className="list-group-item list-group-item-action">
+                    {agency.displayName} 
+                    <span className="badge badge-primary badge-pill float-right">{agency.count}</span>
+                  </Link>
+                  
+                ))}
+              </ul>
+            </div>
+            <div className="col-md-6">
+              <h4>By Category</h4>
+              <ul className="list-group">
+                {categories.map(category => (
+                  
+                  <Link to={`agency/${category._id}`} key={category._id} className="list-group-item list-group-item-action">
+                    {category._id} 
+                    <span className="badge badge-primary badge-pill float-right">{category.count}</span>
+                  </Link>
+                  
+                ))}
+              </ul>
+            </div>
+          </div>
+        </Layout>
+
       );
     }
   }

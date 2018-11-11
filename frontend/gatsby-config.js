@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby Default Starter',
+    title: 'NYC Civic Jobs',
   },
   plugins: [
     'gatsby-plugin-react-helmet',
