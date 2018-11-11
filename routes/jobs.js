@@ -30,7 +30,8 @@ router.get('/', function(req, res, next) {
     Job.aggregate([
       {
         $group: {
-            _id: '$job_category',  //$region is the column name in collection
+            _id: '$category_id',  //$region is the column name in collection
+            displayName : { $first: '$job_category' },
             count: {$sum: 1}
         }
       },
@@ -53,6 +54,19 @@ router.get('/agency/:agency_id', function(req, res, next) {
   const posting_type = 'External';
   
   Job.find({ agency_id, posting_type }, fields, {sort: {posting_date: 'desc'}}, (err, jobs) => {
+    if (err) return handleError(err);
+    
+    res.send(jobs);
+  });
+});
+  
+// get jobs by category
+router.get('/category/:category_id', function(req, res, next) {
+  const { category_id } = req.params;
+  
+  const posting_type = 'External';
+  
+  Job.find({ category_id, posting_type }, fields, {sort: {posting_date: 'desc'}}, (err, jobs) => {
     if (err) return handleError(err);
     
     res.send(jobs);

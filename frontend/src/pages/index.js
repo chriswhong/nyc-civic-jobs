@@ -66,8 +66,8 @@ export default class IndexPage extends React.Component {
               <ul className="list-group">
                 {categories.map(category => (
                   
-                  <Link to={`agency/${category._id}`} key={category._id} className="list-group-item list-group-item-action">
-                    {category._id} 
+                  <Link to={`category/${category._id}`} key={category._id} className="list-group-item list-group-item-action">
+                    {category.displayName} 
                     <span className="badge badge-primary badge-pill float-right">{category.count}</span>
                   </Link>
                   

@@ -16,9 +16,18 @@ request({
   
   // add clean agency_id to each record
   jobsWithAgencyData = jobs.map((job) => {
-    const { displayName } = agencyLookup(job.agency);
-    job.agency_id = slugify(displayName, { remove: /[*+~.()'"!:@]/g }).toLowerCase();
+    const { agency, job_category } = job;
+
+    const { displayName } = agencyLookup(agency);
+    job.agency_id = slugify(displayName, { remove: /[*+~.()'"!:@,]/g }).toLowerCase();
     job.agency = displayName;
+    
+    if (job_category) {
+      job.category_id = slugify(job_category, { remove: /[*+~.()'"!:@,]/g }).toLowerCase();
+    } else {
+      job.category_id = 'no-category'
+      job.job_category = 'No Category'
+    }
 
     return job;
   });
