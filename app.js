@@ -34,6 +34,14 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true });
 
 app.use('/jobs', jobs);
 
+app.get('/agency/*', function( req, res ) {
+  res.sendfile(path.join(__dirname, 'public/agency', 'index.html'));
+});
+
+app.get('/category/*', function( req, res ) {
+  res.sendfile(path.join(__dirname, 'public/category', 'index.html'));
+});
+
 // // catch 404 and forward to error handler
 // app.use(function(req, res, next) {
 //   var err = new Error('Not Found');

@@ -12,7 +12,6 @@ const formatCurrency = (number) => {
 
 export default class AgencyPage extends React.Component {  
   constructor(props) {
-    console.log(props.location.pathname)
     super(props);
     this.state = {
       error: null,
@@ -22,8 +21,8 @@ export default class AgencyPage extends React.Component {
   }
   
   componentDidMount() {
-    const agencySlug = this.props.location.pathname.split('/category/')[1];
-    fetch(`http://localhost:3000/jobs/category/${agencySlug}`)
+    const agencySlug = this.props.location.pathname.split('/agency/')[1];
+    fetch(`/jobs/agency/${agencySlug}`)
       .then(res => res.json())
       .then(
         (jobs) => {
@@ -52,17 +51,17 @@ export default class AgencyPage extends React.Component {
     } else if (!isLoaded) {
       return <div>Loading...</div>;
     } else {
-      const { job_category } = jobs[0];
+      const { agency } = jobs[0];
       const count = jobs.length;
       
       return (
         <Layout>
           <Link to="/">Back to Agency Listing</Link>
-          <h3>Showing {count} job listings for category {job_category}</h3>
+          <h3>Showing {count} job listings for {agency}</h3>
           <p>Click a job to view the full listing on NYC&apos;s offical jobs website</p>
           <div className="list-group">
             {jobs.map(job => {
-              const { job_id, agency, business_title, job_category, posting_date, salary_range_from, salary_range_to } = job;
+              const { job_id, business_title, job_category, posting_date, salary_range_from, salary_range_to } = job;
               const date_string = moment(posting_date).fromNow()
               
               const url = `https://a127-jobs.nyc.gov/psc/nycjobs/EMPLOYEE/HRMS/c/HRS_HRAM.HRS_APP_SCHJOB.GBL?Page=HRS_APP_JBPST&Action=U&FOCUS=Applicant&SiteId=1&JobOpeningId=${job_id}&PostingSeq=1`
@@ -72,7 +71,6 @@ export default class AgencyPage extends React.Component {
                 
                   <div className="d-flex w-100 justify-content-between"> 
                     <div>
-                      <span className="badge badge-secondary">{agency}</span>
                       <h5 className="mb-1">{business_title}</h5>
                       <small>Division: {job.division_work_unit}</small> 
                       <p><small>Compensation: {formatCurrency(salary_range_from)} - {formatCurrency(salary_range_to)}</small></p>

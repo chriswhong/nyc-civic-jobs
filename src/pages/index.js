@@ -6,17 +6,17 @@ import Image from '../components/image'
 
 export default class IndexPage extends React.Component {  
   constructor(props) {
-    console.log(props.location.pathname)
     super(props);
     this.state = {
       error: null,
       isLoaded: false,
       agencies: [],
+      categories: [],
     };
   }
   
   componentDidMount() {
-    fetch(`http://localhost:3000/jobs/`)
+    fetch(`/jobs/`)
       .then(res => res.json())
       .then(
         ({agencies, categories}) => {

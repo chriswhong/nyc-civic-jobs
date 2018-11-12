@@ -1,11 +1,14 @@
 {
-  "name": "nyc-jobs",
+  "name": "nyc-civic-jobs",
   "version": "1.0.0",
   "description": "",
   "main": "load-data.js",
   "scripts": {
     "start": "node ./bin/www",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "develop-server": "nodemon ./bin/www",
+    "format": "prettier --write \"src/**/*.js\""
   },
   "author": "",
   "license": "ISC",
@@ -16,14 +19,29 @@
     "debug": "~2.6.9",
     "dotenv": "^6.1.0",
     "express": "~4.15.5",
+    "gatsby": "^2.0.19",
+    "gatsby-image": "^2.0.15",
+    "gatsby-plugin-manifest": "^2.0.5",
+    "gatsby-plugin-offline": "^2.0.11",
+    "gatsby-plugin-react-helmet": "^3.0.0",
+    "gatsby-plugin-sharp": "^2.0.7",
+    "gatsby-source-filesystem": "^2.0.4",
+    "gatsby-transformer-sharp": "^2.1.4",
     "jade": "~1.11.0",
     "moment": "^2.22.2",
     "mongoose": "^5.3.11",
     "morgan": "~1.9.0",
     "numeral": "^2.0.6",
+    "react": "^16.5.1",
     "react-bootstrap": "^0.32.4",
+    "react-dom": "^16.5.1",
+    "react-helmet": "^5.2.0",
+    "react-router-dom": "^4.3.1",
     "request": "^2.88.0",
     "serve-favicon": "~2.4.5",
     "slugify": "^1.3.2"
+  },
+  "devDependencies": {
+    "prettier": "^1.14.2"
   }
 }
