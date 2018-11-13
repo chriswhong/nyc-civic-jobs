@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const jobSchema = require('../schema/job');
 
 // fields to return
-const fields = 'job_id agency business_title division_work_unit job_category posting_date salary_range_from salary_range_to';
+const fields = 'job_id agency business_title division_work_unit job_category posting_date salary_range_from salary_range_to salary_frequency job_description';
 
 const Job = mongoose.model('Job', jobSchema);
 
