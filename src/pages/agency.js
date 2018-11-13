@@ -13,7 +13,7 @@ const formatCurrency = (number) => {
   return numeral(number).format('($0a)')
 }
 
-export default class AgencyPage extends React.Component {  
+export default class AgencyPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,7 +22,7 @@ export default class AgencyPage extends React.Component {
       jobs: [],
     };
   }
-  
+
   componentDidMount() {
     const agencySlug = this.props.location.pathname.split('/agency/')[1];
     const host = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : '';
@@ -46,10 +46,10 @@ export default class AgencyPage extends React.Component {
         }
       )
   }
-  
+
   render() {
     const { error, isLoaded, jobs } = this.state;
-    
+
     if (error) {
       return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
@@ -61,7 +61,7 @@ export default class AgencyPage extends React.Component {
     } else {
       const { agency } = jobs[0];
       const count = jobs.length;
-      
+
       return (
         <Layout>
           <Link to="/">Home</Link> | {agency}
@@ -71,27 +71,27 @@ export default class AgencyPage extends React.Component {
             {jobs.map(job => {
               const { job_id, business_title, job_category, posting_date, salary_range_from, salary_range_to, job_description, salary_frequency } = job;
               const date_string = moment(posting_date).fromNow()
-              
+
               const url = `https://a127-jobs.nyc.gov/psc/nycjobs/EMPLOYEE/HRMS/c/HRS_HRAM.HRS_APP_SCHJOB.GBL?Page=HRS_APP_JBPST&Action=U&FOCUS=Applicant&SiteId=1&JobOpeningId=${job_id}&PostingSeq=1`
-              
+
               return (
-                <div key={job.job_id} className="list-group-item">    
+                <div key={job.job_id} className="list-group-item">
                   <div className="row">
                     <div className="col-md-12">
                       <small><span className="badge badge-secondary">{job_category}</span> {date_string}</small>
                     <br/>
                   </div>
-                    
+
                     <div className="col-md-12">
                       <h4 className="mb-1">{business_title}</h4>
-                      <small>Division: {job.division_work_unit}</small> 
+                      <small>Division: {job.division_work_unit}</small>
                       <p><small>Compensation: {formatCurrency(salary_range_from)} - {formatCurrency(salary_range_to)} ({salary_frequency})</small></p>
                       <ExpandCollapse
                         previewHeight="53px"
                       >
                         <p><small>{job_description}</small></p>
                       </ExpandCollapse>
-                      <button type="button" className="btn btn-secondary btn-sm">View On NYC Jobs</button>
+                      <a href={url} target="_blank"><button type="button" className="btn btn-secondary btn-sm">View On NYC Jobs</button></a>
                     </div>
                   </div>
                 </div>

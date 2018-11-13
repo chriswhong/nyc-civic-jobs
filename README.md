@@ -21,7 +21,7 @@ TODO: Automate data update
 - Clone this repo `git clone https://github.com/chriswhong/nyc-civic-jobs.git`
 - Install dependencies `cd nyc-civic-jobs && npm install`
 - Start the express server `npm run develop-server`
-- Start the gatsby development server `gatsby develop`
+- Start the gatsby development server in another terminal `gatsby develop`
 - Add `MONGO_URI` to `.env` so the api can connect to the database
 - Test api calls at `localhost:3000`
 - Test the frontend app at `localhost:8000`

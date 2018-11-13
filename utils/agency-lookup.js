@@ -232,12 +232,11 @@ const agencies = [
   },
   {
     id: 'MANHATTAN COMMUNITY BOARD #10',
-    displayName: 'Manhattan Community Board 10' 
+    displayName: 'Manhattan Community Board 10'
   },
 ];
 
 const agencyLookup = (id) => {
-  console.log(`Looking up ${id}`)
   return agencies.find((agency) => agency.id === id);
 }
 
