@@ -42,11 +42,11 @@ export default class IndexPage extends React.Component {
   }
   
   onAgencyFilterChange(e) {
-    this.setState({ agencyFilter: e.target.value })
+    this.setState({ agencyFilter: e.target.value.toLowerCase() })
   }
   
   onCategoryFilterChange(e) {
-    this.setState({ categoryFilter: e.target.value })
+    this.setState({ categoryFilter: e.target.value.toLowerCase() })
   }
   
   render() {
