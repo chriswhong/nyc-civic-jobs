@@ -34,6 +34,7 @@ const JobListing = ({ entity, jobs, badgeField }) => {
 
                 <div className="col-md-12">
                   <h4 className="mb-1">{business_title}</h4>
+                  <small>Job ID: {job_id}</small><br/>
                   <small>Division: {job[badgeField]}</small>
                   <p><small>Compensation: {formatCurrency(salary_range_from)} - {formatCurrency(salary_range_to)} ({salary_frequency})</small></p>
                   <ExpandCollapse
