@@ -9,31 +9,43 @@ require('dotenv').config();
 
 const apiCall = 'https://data.cityofnewyork.us/resource/swhp-yxa4.json?$limit=10000';
 
+const replaceOddCharacters = (string) => {
+  return string
+    .replace(/â€œ/g, '“')
+    .replace(/â€/g, '”')
+    .replace(/â€™/g, '’')
+    .replace(/â€˜/g, '‘')
+    .replace(/â€”/g, '–')
+    .replace(/â€“/g, '—')
+    .replace(/â€¢/g, '-')
+    .replace(/â€¦/g, '…');
+};
+
 request({
   url: apiCall,
-  json: true,
-}, (err, response, jobs) => {
-  
+}, (err, response, rawJSON) => {
+  // replace oddly-encoded characters in the raw data
+  const cleanJSON = JSON.parse(replaceOddCharacters(rawJSON));
+    
   // add clean agency_id to each record
-  jobsWithAgencyData = jobs.map((job) => {
+  jobsWithAgencyData = cleanJSON.map((job) => {
     const { agency, job_category } = job;
 
     const { displayName } = agencyLookup(agency);
     job.agency_id = slugify(displayName, { remove: /[*+~.()'"!:@,]/g }).toLowerCase();
     job.agency = displayName;
     
+    // add clean category slug to each record
     if (job_category) {
       job.category_id = slugify(job_category, { remove: /[*+~.()'"!:@,]/g }).toLowerCase();
     } else {
       job.category_id = 'no-category'
       job.job_category = 'No Category'
     }
-
+  
     return job;
   });
-  
-  console.log(jobsWithAgencyData)
- 
+   
   // make a connection
   mongoose.connect(process.env.MONGO_URI);
    
@@ -52,7 +64,7 @@ request({
       Job.deleteMany({}, () => {
         console.log('Deleted all documents in Collection')
         
-        // save multiple documents to the collection referenced by Book Model
+        // save multiple documents to the collection referenced by Job Model
         Job.collection.insertMany(jobsWithAgencyData, function (err, docs) {
           if (err){ 
               return console.error(err);
@@ -61,7 +73,5 @@ request({
           }
         });
       })
-   
-
   })
 })
