@@ -4,6 +4,7 @@ const slugify = require('slugify')
 
 const jobSchema = require('./schema/job');
 const agencyLookup = require('./utils/agency-lookup');
+const processCategories = require('./utils/process-categories');
 
 require('dotenv').config();
 
@@ -26,7 +27,7 @@ request({
 }, (err, response, rawJSON) => {
   // replace oddly-encoded characters in the raw data
   const cleanJSON = JSON.parse(replaceOddCharacters(rawJSON));
-    
+
   // add clean agency_id to each record
   jobsWithAgencyData = cleanJSON.map((job) => {
     const { agency, job_category } = job;
@@ -34,39 +35,39 @@ request({
     const { displayName } = agencyLookup(agency);
     job.agency_id = slugify(displayName, { remove: /[*+~.()'"!:@,]/g }).toLowerCase();
     job.agency = displayName;
-    
+
+    // convert job_categories to array
     // add clean category slug to each record
     if (job_category) {
-      job.category_id = slugify(job_category, { remove: /[*+~.()'"!:@,]/g }).toLowerCase();
+      job.job_category_ids = processCategories(job_category);
     } else {
-      job.category_id = 'no-category'
-      job.job_category = 'No Category'
+      job.job_category_ids = ['no-category']
     }
-  
+
     return job;
   });
-   
+
   // make a connection
   mongoose.connect(process.env.MONGO_URI);
-   
+
   // get reference to database
   var db = mongoose.connection;
-   
+
   db.on('error', console.error.bind(console, 'connection error:'));
-   
+
   db.once('open', function() {
       console.log("Connection Successful!");
-   
+
       // compile schema to model
       var Job = mongoose.model('Job', jobSchema, 'jobs');
-      
-      // delete everything in the collection 
+
+      // delete everything in the collection
       Job.deleteMany({}, () => {
         console.log('Deleted all documents in Collection')
-        
+
         // save multiple documents to the collection referenced by Job Model
         Job.collection.insertMany(jobsWithAgencyData, function (err, docs) {
-          if (err){ 
+          if (err){
               return console.error(err);
           } else {
             console.log("Multiple documents inserted to Collection");

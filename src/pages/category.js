@@ -4,6 +4,7 @@ import moment from 'moment'
 import numeral from 'numeral'
 import ExpandCollapse from 'react-expand-collapse';
 
+import { LookupCategoryDisplayName } from '../../utils/process-categories';
 import JobListing from '../components/job-listing';
 import Layout from '../components/layout'
 import Image from '../components/image'
@@ -24,6 +25,8 @@ export default class AgencyPage extends React.Component {
 
   componentDidMount() {
     const categorySlug = this.props.location.pathname.split('/category/')[1];
+    const categoryDisplayName = LookupCategoryDisplayName(categorySlug);
+
     const host = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : '';
     fetch(`${host}/jobs/category/${categorySlug}`)
       .then(res => res.json())
@@ -31,7 +34,8 @@ export default class AgencyPage extends React.Component {
         (jobs) => {
           this.setState({
             isLoaded: true,
-            jobs
+            jobs,
+            categoryDisplayName,
           });
         },
         // Note: it's important to handle errors here
@@ -47,7 +51,7 @@ export default class AgencyPage extends React.Component {
   }
 
   render() {
-    const { error, isLoaded, jobs } = this.state;
+    const { error, isLoaded, jobs, categoryDisplayName } = this.state;
 
     if (error) {
       return <div>Error: {error.message}</div>;
@@ -58,13 +62,14 @@ export default class AgencyPage extends React.Component {
         </Layout>
       );
     } else {
-      const { job_category } = jobs[0];
+
+      // find position of this page's slug in category_ids, get corresponding category
       const count = jobs.length;
 
       return (
         <Layout>
           <JobListing
-            entity={job_category}
+            entity={categoryDisplayName}
             jobs={jobs}
             badgeField='agency'
           />

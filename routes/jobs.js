@@ -3,9 +3,10 @@ const router = express.Router();
 const mongoose = require('mongoose');
 
 const jobSchema = require('../schema/job');
+const { LookupCategoryDisplayName } = require('../utils/process-categories')
 
 // fields to return
-const fields = 'job_id agency business_title division_work_unit job_category posting_date salary_range_from salary_range_to salary_frequency job_description';
+const fields = 'job_id agency agency_id business_title division_work_unit job_category_ids posting_date salary_range_from salary_range_to salary_frequency job_description';
 
 const Job = mongoose.model('Job', jobSchema);
 
@@ -28,10 +29,10 @@ router.get('/', function(req, res, next) {
     ]).exec(),
     Job.aggregate([
       { $match: { posting_type } },
+      { $unwind: "$job_category_ids" },
       {
         $group: {
-            _id: '$category_id',  //$region is the column name in collection
-            displayName : { $first: '$job_category' },
+            _id: '$job_category_ids',  //$region is the column name in collection
             count: {$sum: 1}
         }
       },
@@ -40,6 +41,16 @@ router.get('/', function(req, res, next) {
   ];
 
   Promise.all(promises).then(([agencies, categories]) => {
+    // lookup and append displayName to each category
+    categories = categories.map(({ _id, count }) => {
+      const displayName = LookupCategoryDisplayName(_id);
+      return {
+        _id,
+        displayName,
+        count,
+      }
+    });
+
     res.send({
       agencies,
       categories,
@@ -62,7 +73,7 @@ router.get('/agency/:agency_id', function(req, res, next) {
 router.get('/category/:category_id', function(req, res, next) {
   const { category_id } = req.params;
 
-  Job.find({ category_id, posting_type }, fields, {sort: {posting_date: 'desc'}}, (err, jobs) => {
+  Job.find({ job_category_ids: category_id, posting_type }, fields, {sort: {posting_date: 'desc'}}, (err, jobs) => {
     if (err) return handleError(err);
 
     res.send(jobs);
