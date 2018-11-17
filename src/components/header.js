@@ -1,7 +1,7 @@
-import React from 'react'
-import { Link } from 'gatsby'
+import React from 'react';
+import { Link } from 'gatsby';
 
-const Header = ({ siteTitle }) => (
+const Header = () => (
   <div
     style={{
       background: '#565875',
@@ -21,16 +21,19 @@ const Header = ({ siteTitle }) => (
           style={{
             color: 'white',
             textDecoration: 'none',
-            'fontFamily': 'Teko, sans-serif',
-            'fontSize': '2.5rem',
-            'textShadow': '1px 1px 1px rgba(179, 166, 166, 0.48)',
+            fontFamily: 'Teko, sans-serif',
+            fontSize: '2.5rem',
+            textShadow: '1px 1px 1px rgba(179, 166, 166, 0.48)',
           }}
         >
-          Civic<br/>Jobs<div className='dot-nyc'>.nyc</div>
+          Civic
+          <br />
+Jobs
+          <div className="dot-nyc">.nyc</div>
         </Link>
       </h1>
     </div>
   </div>
-)
+);
 
-export default Header
+export default Header;

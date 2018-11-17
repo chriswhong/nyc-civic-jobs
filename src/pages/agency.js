@@ -1,12 +1,7 @@
-import React from 'react'
-import { Link } from 'gatsby'
+import React from 'react';
 
 import JobListing from '../components/job-listing';
-
-import Layout from '../components/layout'
-import Image from '../components/image'
-
-
+import Layout from '../components/layout';
 
 export default class AgencyPage extends React.Component {
   constructor(props) {
@@ -19,7 +14,8 @@ export default class AgencyPage extends React.Component {
   }
 
   componentDidMount() {
-    const agencySlug = this.props.location.pathname.split('/agency/')[1];
+    const { props } = this;
+    const agencySlug = props.location.pathname.split('/agency/')[1];
     const host = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : '';
     fetch(`${host}/jobs/agency/${agencySlug}`)
       .then(res => res.json())
@@ -27,7 +23,7 @@ export default class AgencyPage extends React.Component {
         (jobs) => {
           this.setState({
             isLoaded: true,
-            jobs
+            jobs,
           });
         },
         // Note: it's important to handle errors here
@@ -36,35 +32,39 @@ export default class AgencyPage extends React.Component {
         (error) => {
           this.setState({
             isLoaded: true,
-            error
+            error,
           });
-        }
-      )
+        },
+      );
   }
 
   render() {
     const { error, isLoaded, jobs } = this.state;
 
     if (error) {
-      return <div>Error: {error.message}</div>;
-    } else if (!isLoaded) {
+      return (
+        <div>
+Error:
+          {error.message}
+        </div>
+      );
+    } if (!isLoaded) {
       return (
         <Layout>
           <div>Loading...</div>
         </Layout>
       );
-    } else {
-      const { agency } = jobs[0];
-
-      return (
-        <Layout>
-          <JobListing
-            entity={agency}
-            jobs={jobs}
-            badgeField='division_work_unit'
-          />
-        </Layout>
-      );
     }
+    const { agency } = jobs[0];
+
+    return (
+      <Layout>
+        <JobListing
+          entity={agency}
+          jobs={jobs}
+          badgeField="division_work_unit"
+        />
+      </Layout>
+    );
   }
 }

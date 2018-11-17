@@ -1,12 +1,13 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import Helmet from 'react-helmet'
-import { StaticQuery, graphql } from 'gatsby'
+import React from 'react';
+import PropTypes from 'prop-types';
+import Helmet from 'react-helmet';
+import { StaticQuery, graphql } from 'gatsby';
 
-import Header from './header'
+import Header from './header';
 
+import icon16 from '../../static/favicon-16x16.png';
+import icon32 from '../../static/favicon-32x32.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 
 const Layout = ({ children }) => (
   <StaticQuery
@@ -28,7 +29,12 @@ const Layout = ({ children }) => (
             { name: 'keywords', content: 'sample, something' },
           ]}
         >
-          <link href="https://fonts.googleapis.com/css?family=Teko" rel="stylesheet" />
+          <link
+            href="https://fonts.googleapis.com/css?family=Teko"
+            rel="stylesheet"
+          />
+          <link rel="icon" type="image/png" sizes="32x32" href={icon32} />
+          <link rel="icon" type="image/png" sizes="16x16" href={icon16} />
           <html lang="en" />
         </Helmet>
         <Header siteTitle={data.site.siteMetadata.title} />
@@ -45,10 +51,10 @@ const Layout = ({ children }) => (
       </>
     )}
   />
-)
+);
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
-}
+};
 
-export default Layout
+export default Layout;

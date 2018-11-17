@@ -79,16 +79,12 @@ const categories = [
 
 const processCategories = (categoryString) => {
   // loop over categories, if exists in categoryString, push to array
-  const matches =  categories.filter((d) => {
-    return categoryString.includes(d.displayName)
-  });
+  const matches = categories.filter(d => categoryString.includes(d.displayName));
 
   return matches.map(d => d.id);
-}
+};
 
-const LookupCategoryDisplayName = (id) => {
-  return categories.filter(d => d.id === id)[0].displayName;
-}
+const LookupCategoryDisplayName = id => categories.filter(d => d.id === id)[0].displayName;
 
 module.exports = {
   processCategories,
