@@ -67,6 +67,7 @@ Error:
         <JobListing
           entity={categoryDisplayName}
           jobs={jobs}
+          path="Category"
           badgeField="agency"
         />
       </Layout>

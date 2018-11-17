@@ -16,20 +16,25 @@ library.add(faMoneyBillWave, faClock, faTags);
 
 const formatCurrency = number => numeral(number).format('($0a)');
 
-const JobListing = ({ entity, jobs }) => {
-  // format human-readable title
-  let prefix = 'the NYC';
-  prefix = entity.includes('Borough President') ? 'the' : prefix;
-  prefix = entity.includes('Community Board') ? '' : prefix;
+const JobListing = ({ entity, jobs, path }) => {
+  let title = `NYC Job Category: ${entity}`;
 
-  const title = `Jobs at ${prefix} ${entity}`;
+  if (path === 'Agency') {
+    // format human-readable title
+    let prefix = 'the NYC';
+    prefix = entity.includes('Borough President') ? 'the' : prefix;
+    prefix = entity.includes('Community Board') ? '' : prefix;
+
+    title = `Jobs at ${prefix} ${entity}`;
+  }
+
 
   return (
     <div>
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
           <li className="breadcrumb-item"><Link to="/">Home</Link></li>
-          <li className="breadcrumb-item active" aria-current="page">{entity}</li>
+          <li className="breadcrumb-item active" aria-current="page">{`${path} / ${entity}`}</li>
         </ol>
       </nav>
       <h2>{title}</h2>
@@ -37,6 +42,7 @@ const JobListing = ({ entity, jobs }) => {
       <div className="list-group job-listing">
         {jobs.map((job) => {
           const {
+            agency,
             job_id: jobId,
             business_title: businessTitle,
             job_category_ids: jobCategoryIds,
@@ -48,6 +54,9 @@ const JobListing = ({ entity, jobs }) => {
             division_work_unit: divisionWorkUnit,
           } = job;
           const dateString = moment(postingDate).fromNow();
+
+          let subTitle = `${agency} / ${divisionWorkUnit}`;
+          if (path === 'Agency') subTitle = divisionWorkUnit;
 
           const url = `https://a127-jobs.nyc.gov/psc/nycjobs/EMPLOYEE/HRMS/c/HRS_HRAM.HRS_APP_SCHJOB.GBL?Page=HRS_APP_JBPST&Action=U&FOCUS=Applicant&SiteId=1&JobOpeningId=${jobId}&PostingSeq=1`;
 
@@ -71,7 +80,7 @@ const JobListing = ({ entity, jobs }) => {
                     </small>
                   </h4>
                   <div className="division">
-                    {divisionWorkUnit}
+                    {subTitle}
                   </div>
                   <ExpandCollapse
                     previewHeight="53px"
