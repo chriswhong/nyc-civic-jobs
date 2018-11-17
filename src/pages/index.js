@@ -86,9 +86,9 @@ Error:
 
             <p>
               <small>
-This site was built with
+This site was built with &nbsp;
                 <a href="https://data.cityofnewyork.us/City-Government/NYC-Jobs/kpav-sd4t">NYC Open Data</a>
-, and is not an offical NYC Government website.  Also, it&apos;s
+, and is not an offical NYC Government website.  Also, it&apos;s&nbsp;
                 <a href="https://github.com/chriswhong/nyc-civic-jobs">open source</a>
 !
               </small>
