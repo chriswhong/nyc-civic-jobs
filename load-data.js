@@ -4,7 +4,7 @@ const slugify = require('slugify')
 
 const jobSchema = require('./schema/job');
 const agencyLookup = require('./utils/agency-lookup');
-const processCategories = require('./utils/process-categories');
+const { processCategories } = require('./utils/process-categories');
 
 require('dotenv').config();
 
@@ -39,6 +39,7 @@ request({
     // convert job_categories to array
     // add clean category slug to each record
     if (job_category) {
+      console.log(processCategories)
       job.job_category_ids = processCategories(job_category);
     } else {
       job.job_category_ids = ['no-category']

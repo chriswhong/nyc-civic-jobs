@@ -1,0 +1,52 @@
+/* Custom Styles */
+
+h4>small {
+    font-size: 55%;
+    color: #828282;
+}
+
+.division {
+  font-weight: 500;
+  font-size: 85%;
+  margin: 0px 0 12px 0;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li>.svg-inline--fa {
+  margin-right: 5px;
+}
+
+.fa-money-bill-wave {
+  color: #6ea06e;
+}
+
+.fa-tags {
+  color: #76b6ee;
+}
+
+.fa-clock {
+  color: #e07777;
+}
+
+.job-listing li {
+  margin-bottom: 8px;
+}
+
+.breadcrumb {
+  padding: 0.3rem 1rem;
+}
+
+.site-title {
+  line-height: 24px;
+}
+
+.dot-nyc {
+  display: inherit;
+  font-size: 1.5rem;
+  color: #c5c5c5;
+  text-shadow: none;
+}

@@ -48,7 +48,7 @@ const agencies = [
   },
   {
     id: 'NYC HOUSING AUTHORITY',
-    displayName: 'NYC Housing Authority',
+    displayName: 'Housing Authority',
   },
   {
     id: 'DEPARTMENT OF INVESTIGATION',
@@ -56,7 +56,7 @@ const agencies = [
   },
   {
     id: 'HOUSING PRESERVATION & DVLPMNT',
-    displayName: 'Housing Preservation & Development',
+    displayName: 'Department of Housing Preservation & Development',
     acronym: 'HPD'
   },
   {
@@ -74,15 +74,16 @@ const agencies = [
   },
   {
     id: 'HRA/DEPT OF SOCIAL SERVICES',
-    displayName: 'Human Resources Administration (HRA)/ Department of Social Services',
+    displayName: 'Human Resources Administration',
+    acronym: 'HRA',
   },
   {
     id: 'ADMIN TRIALS AND HEARINGS',
-    displayName: 'Administrative Trials and Hearings',
+    displayName: 'Department of Administrative Trials and Hearings',
   },
   {
     id: 'CONSUMER AFFAIRS',
-    displayName: 'Consumer Affairs',
+    displayName: 'Department of Consumer Affairs',
   },
   {
     id: 'DEPARTMENT OF BUSINESS SERV.',
@@ -104,7 +105,7 @@ const agencies = [
   },
   {
     id: 'NYC EMPLOYEES RETIREMENT SYS',
-    displayName: 'NYC Employees Retirement System',
+    displayName: 'Employees Retirement System',
   },
   {
     id: 'POLICE DEPARTMENT',
@@ -186,11 +187,11 @@ const agencies = [
   },
   {
     id: 'NYC DEPT OF VETERANS\' SERVICES',
-    displayName: 'NYC Department of Veteran\'s Services',
+    displayName: 'Department of Veteran\'s Services',
   },
   {
     id: 'PRESIDENT BOROUGH OF MANHATTAN',
-    displayName: 'Manhattan Borough President',
+    displayName: 'Manhattan Borough President\'s Office',
   },
   {
     id: 'DEPARTMENT OF FINANCE',
@@ -224,7 +225,7 @@ const agencies = [
   },
   {
     id: 'BOROUGH PRESIDENT-QUEENS',
-    displayName: 'Queens Borough President',
+    displayName: 'Queens Borough President\'s Office',
   },
   {
     id: 'OFFICE OF COLLECTIVE BARGAININ',

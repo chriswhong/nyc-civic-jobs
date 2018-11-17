@@ -7,6 +7,7 @@ import Header from './header'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+
 const Layout = ({ children }) => (
   <StaticQuery
     query={graphql`
@@ -27,6 +28,7 @@ const Layout = ({ children }) => (
             { name: 'keywords', content: 'sample, something' },
           ]}
         >
+          <link href="https://fonts.googleapis.com/css?family=Teko" rel="stylesheet" />
           <html lang="en" />
         </Helmet>
         <Header siteTitle={data.site.siteMetadata.title} />

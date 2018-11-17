@@ -11,8 +11,8 @@
 .react-expand-collapse__button {
   color: #3285b2;
   position: absolute;
-  bottom: 7px;
-  right: 6px;
+  bottom: 6px;
+  right: 0px;
   background-color: #fff;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
