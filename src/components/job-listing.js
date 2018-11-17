@@ -17,7 +17,6 @@ const JobListing = ({ entity, jobs, path }) => {
     title = `Jobs at ${prefix} ${entity}`;
   }
 
-
   return (
     <div>
       <nav aria-label="breadcrumb">
@@ -27,7 +26,15 @@ const JobListing = ({ entity, jobs, path }) => {
         </ol>
       </nav>
       <h2>{title}</h2>
-      <p>Click a job to view the full listing on NYC&apos;s offical jobs website</p>
+      <div>
+        <p>
+          <span className="badge badge-secondary">
+            Showing&nbsp;
+            {jobs.length}
+            &nbsp;job postings
+          </span>
+        </p>
+      </div>
       <div className="list-group job-listing">
         {jobs.map((job) => {
           const {
