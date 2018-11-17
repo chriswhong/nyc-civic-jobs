@@ -1,20 +1,9 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import moment from 'moment';
-import numeral from 'numeral';
-import ExpandCollapse from 'react-expand-collapse';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMoneyBillWave, faClock, faTags } from '@fortawesome/free-solid-svg-icons';
 
-import { LookupCategoryDisplayName } from '../../utils/process-categories';
+import JobDetails from './job-details';
 import './expand-collapse.css';
 import './styles.css';
-
-
-library.add(faMoneyBillWave, faClock, faTags);
-
-const formatCurrency = number => numeral(number).format('($0a)');
 
 const JobListing = ({ entity, jobs, path }) => {
   let title = `NYC Job Category: ${entity}`;
@@ -45,27 +34,11 @@ const JobListing = ({ entity, jobs, path }) => {
             agency,
             job_id: jobId,
             business_title: businessTitle,
-            job_category_ids: jobCategoryIds,
-            posting_date: postingDate,
-            salary_range_from: salaryRangeFrom,
-            salary_range_to: salaryRangeTo,
-            job_description: jobDescription,
-            salary_frequency: salaryFrequency,
             division_work_unit: divisionWorkUnit,
           } = job;
-          const dateString = moment(postingDate).fromNow();
 
           let subTitle = `${agency} / ${divisionWorkUnit}`;
           if (path === 'Agency') subTitle = divisionWorkUnit;
-
-          const url = `https://a127-jobs.nyc.gov/psc/nycjobs/EMPLOYEE/HRMS/c/HRS_HRAM.HRS_APP_SCHJOB.GBL?Page=HRS_APP_JBPST&Action=U&FOCUS=Applicant&SiteId=1&JobOpeningId=${jobId}&PostingSeq=1`;
-
-          const jobCategories = jobCategoryIds.map((id) => {
-            const displayName = LookupCategoryDisplayName(id);
-            return (
-              <small key={id}><a href={`/category/${id}`}><span className="badge badge-secondary">{displayName}</span></a></small>
-            );
-          });
 
           return (
             <div key={jobId} className="list-group-item">
@@ -82,38 +55,12 @@ const JobListing = ({ entity, jobs, path }) => {
                   <div className="division">
                     {subTitle}
                   </div>
-                  <ExpandCollapse
-                    previewHeight="53px"
-                  >
-                    <p><small>{jobDescription}</small></p>
-                  </ExpandCollapse>
-                  <a href={url} target="_blank" rel="noopener noreferrer"><button type="button" className="btn btn-secondary btn-sm">View On NYC Jobs</button></a>
+                  <Link to={`/job/${jobId}`}>
+                    <button type="button" className="btn btn-secondary btn-sm">See Job Description</button>
+                  </Link>
                 </div>
                 <div className="col-md-4 col-sm-12">
-                  <ul>
-                    <li>
-                      <FontAwesomeIcon icon="clock" />
-                      <small>{dateString}</small>
-                    </li>
-                    <li>
-                      <FontAwesomeIcon icon="money-bill-wave" />
-                      <small>
-                        {formatCurrency(salaryRangeFrom)}
-                        {' '}
--
-                        {' '}
-                        {formatCurrency(salaryRangeTo)}
-                        {' '}
-(
-                        {salaryFrequency}
-)
-                      </small>
-                    </li>
-                    <li>
-                      <FontAwesomeIcon icon="tags" />
-                      {jobCategories}
-                    </li>
-                  </ul>
+                  <JobDetails {...job} />
                 </div>
               </div>
             </div>

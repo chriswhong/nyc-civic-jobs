@@ -50,3 +50,11 @@ li>.svg-inline--fa {
   color: #c5c5c5;
   text-shadow: none;
 }
+
+button>.svg-inline--fa {
+  margin-left: 6px;
+}
+
+button, .badge {
+  background-color: rgb(86, 88, 117);
+}
