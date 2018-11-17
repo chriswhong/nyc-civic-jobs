@@ -12,8 +12,18 @@ module.exports = {
       },
     },
     'gatsby-transformer-sharp',
-    'gatsby-plugin-eslint',
     'gatsby-plugin-sharp',
+    {
+      resolve: 'gatsby-plugin-eslint',
+      options: {
+        test: /\.js$|\.jsx$/,
+        exclude: /(node_modules|cache|public)/,
+        options: {
+          emitWarning: true,
+          failOnError: false,
+        },
+      },
+    },
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
