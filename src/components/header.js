@@ -1,8 +1,10 @@
 import React from 'react';
+import moment from 'moment';
 import { Link } from 'gatsby';
 
-const Header = () => (
+const Header = ({ dataUpdatedAt }) => (
   <div
+    className="header"
     style={{
       background: '#565875',
       marginBottom: '1.45rem',
@@ -32,6 +34,10 @@ Jobs
           <div className="dot-nyc">.nyc</div>
         </Link>
       </h1>
+      <div className="updated-at">
+        Data updated&nbsp;
+        {moment(dataUpdatedAt).format('MMMM Do, YYYY')}
+      </div>
     </div>
   </div>
 );

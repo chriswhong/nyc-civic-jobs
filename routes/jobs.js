@@ -10,9 +10,9 @@ const { LookupCategoryDisplayName } = require('../utils/process-categories');
 const fields = 'job_id agency agency_id business_title division_work_unit job_category_ids posting_date salary_range_from salary_range_to salary_frequency job_description';
 
 const Job = mongoose.model('Job', jobSchema);
+const Meta = mongoose.model('Meta', mongoose.Schema({ dataUpdatedAt: String }), 'meta');
 
 const posting_type = 'External';
-
 
 // get counts by agency and category
 router.get('/', (req, res, next) => {
@@ -89,6 +89,18 @@ router.get('/id/:job_id', (req, res, next) => {
     if (err) return handleError(err);
 
     res.send(job);
+  });
+});
+
+// get one job
+router.get('/meta', (req, res, next) => {
+  const { job_id } = req.params;
+  console.log('hi')
+
+  Meta.findOne({}, 'dataUpdatedAt', (err, meta) => {
+    if (err) return handleError(err);
+    const { dataUpdatedAt } = meta;
+    res.send({ dataUpdatedAt });
   });
 });
 

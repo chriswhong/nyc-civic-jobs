@@ -58,3 +58,15 @@ button>.svg-inline--fa {
 button, .badge {
   background-color: rgb(86, 88, 117);
 }
+
+.header h1 {
+  display: inline-block;
+}
+
+.updated-at {
+  color: #FFF;
+  font-size: 0.7em;
+  display: inline-block;
+  float: right;
+  padding-top: 46px;
+}
