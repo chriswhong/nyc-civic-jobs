@@ -4,9 +4,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 
-// import { LookupCategoryDisplayName } from '../../utils/process-categories';
 import JobDetails from '../components/job-details';
-import Layout from '../components/layout';
 
 library.add(faExternalLinkAlt);
 
@@ -60,9 +58,7 @@ Error:
       );
     } if (!isLoaded) {
       return (
-        <Layout>
-          <div>Loading...</div>
-        </Layout>
+        <div>Loading...</div>
       );
     }
 
@@ -84,7 +80,7 @@ Error:
     const url = `https://a127-jobs.nyc.gov/psc/nycjobs/EMPLOYEE/HRMS/c/HRS_HRAM.HRS_APP_SCHJOB.GBL?Page=HRS_APP_JBPST&Action=U&FOCUS=Applicant&SiteId=1&JobOpeningId=${jobId}&PostingSeq=1`;
 
     return (
-      <Layout>
+      <div>
         <div>
           <nav aria-label="breadcrumb">
             <ol className="breadcrumb">
@@ -116,7 +112,7 @@ Error:
             </button>
           </a>
         </div>
-      </Layout>
+      </div>
     );
   }
 }

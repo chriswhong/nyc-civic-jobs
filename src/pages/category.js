@@ -2,7 +2,6 @@ import React from 'react';
 
 import { LookupCategoryDisplayName } from '../../utils/process-categories';
 import JobListing from '../components/job-listing';
-import Layout from '../components/layout';
 
 export default class AgencyPage extends React.Component {
   constructor(props) {
@@ -56,21 +55,17 @@ Error:
       );
     } if (!isLoaded) {
       return (
-        <Layout>
-          <div>Loading...</div>
-        </Layout>
+        <div>Loading...</div>
       );
     }
 
     return (
-      <Layout>
-        <JobListing
-          entity={categoryDisplayName}
-          jobs={jobs}
-          path="Category"
-          badgeField="agency"
-        />
-      </Layout>
+      <JobListing
+        entity={categoryDisplayName}
+        jobs={jobs}
+        path="Category"
+        badgeField="agency"
+      />
     );
   }
 }

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import Layout from '../components/layout';
 
 export default class IndexPage extends React.Component {
   constructor(props) {
@@ -73,13 +72,11 @@ Error:
       );
     } if (!isLoaded) {
       return (
-        <Layout>
-          <div>Loading...</div>
-        </Layout>
+        <div>Loading...</div>
       );
     }
     return (
-      <Layout>
+      <div>
         <div className="row">
           <div className="col-md-12">
             <p>Welcome to NYC Civic Jobs! Here you can view listings of NYC government jobs by agency and category, and send permalinks to individual jobs.</p>
@@ -147,7 +144,7 @@ This site was built with &nbsp;
             </ul>
           </div>
         </div>
-      </Layout>
+      </div>
 
     );
   }

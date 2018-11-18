@@ -1,7 +1,6 @@
 import React from 'react';
 
 import JobListing from '../components/job-listing';
-import Layout from '../components/layout';
 
 export default class AgencyPage extends React.Component {
   constructor(props) {
@@ -50,22 +49,18 @@ Error:
       );
     } if (!isLoaded) {
       return (
-        <Layout>
-          <div>Loading...</div>
-        </Layout>
+        <div>Loading...</div>
       );
     }
     const { agency } = jobs[0];
 
     return (
-      <Layout>
-        <JobListing
-          entity={agency}
-          jobs={jobs}
-          path="Agency"
-          badgeField="division_work_unit"
-        />
-      </Layout>
+      <JobListing
+        entity={agency}
+        jobs={jobs}
+        path="Agency"
+        badgeField="division_work_unit"
+      />
     );
   }
 }
