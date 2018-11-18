@@ -3,7 +3,6 @@ import { Link } from 'gatsby';
 
 import JobDetails from './job-details';
 import './expand-collapse.css';
-import './styles.css';
 
 const JobListing = ({ entity, jobs, path }) => {
   let title = `NYC Job Category: ${entity}`;

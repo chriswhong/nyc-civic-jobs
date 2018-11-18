@@ -12,8 +12,6 @@ import {
 
 import { LookupCategoryDisplayName } from '../../utils/process-categories';
 import './expand-collapse.css';
-import './styles.css';
-
 
 library.add(faMoneyBillWave, faClock, faTags, faMapMarkerAlt);
 

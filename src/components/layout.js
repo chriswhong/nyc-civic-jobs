@@ -7,7 +7,9 @@ import Header from './header';
 
 import icon16 from '../../static/favicon-16x16.png';
 import icon32 from '../../static/favicon-32x32.png';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './styles.css';
 
 export default class Layout extends React.Component {
   constructor(props) {
