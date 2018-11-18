@@ -7,7 +7,7 @@ const jobSchema = require('../schema/job');
 const { LookupCategoryDisplayName } = require('../utils/process-categories');
 
 // fields to return
-const fields = 'job_id agency agency_id business_title division_work_unit job_category_ids posting_date salary_range_from salary_range_to salary_frequency job_description';
+const fields = 'job_id agency agency_id business_title division_work_unit job_category_ids posting_date salary_range_from salary_range_to salary_frequency job_description work_location';
 
 const Job = mongoose.model('Job', jobSchema);
 const Meta = mongoose.model('Meta', mongoose.Schema({ dataUpdatedAt: String }), 'meta');
