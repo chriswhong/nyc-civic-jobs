@@ -23,6 +23,7 @@ router.get('/', (req, res, next) => {
         $group: {
           _id: '$agency_id', // $region is the column name in collection
           displayName: { $first: '$agency' },
+          acronym: { $first: '$agency_acronym'},
           count: { $sum: 1 },
         },
       },

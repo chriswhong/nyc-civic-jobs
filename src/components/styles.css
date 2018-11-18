@@ -61,6 +61,7 @@ button>.svg-inline--fa {
 
 button, .badge {
   background-color: rgb(86, 88, 117);
+  color: #FFF;
 }
 
 .header h1 {

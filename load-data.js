@@ -37,9 +37,10 @@ const replaceOddCharacters = string => string
   const jobsWithAgencyData = cleanJSON.map((job) => {
     const { agency, job_category } = job;
 
-    const { displayName } = agencyLookup(agency);
+    const { displayName, acronym } = agencyLookup(agency);
     job.agency_id = slugify(displayName, { remove: /[*+~.()'"!:@,]/g }).toLowerCase();
     job.agency = displayName;
+    if (acronym) job.agency_acronym = acronym;
 
     // convert job_categories to array
     // add clean category slug to each record

@@ -71,6 +71,7 @@ const agencies = [
   {
     id: 'DEPARTMENT OF CITY PLANNING',
     displayName: 'Department of City Planning',
+    acronym: 'DCP',
   },
   {
     id: 'HRA/DEPT OF SOCIAL SERVICES',
