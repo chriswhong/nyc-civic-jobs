@@ -15,6 +15,9 @@ const JobListing = ({ entity, jobs, path }) => {
     prefix = entity.includes('Community Board') ? '' : prefix;
 
     title = `Jobs at ${prefix} ${entity}`;
+
+    const acronym = jobs[0].agency_acronym;
+    if (acronym) title = `${title} (${acronym})`;
   }
 
   return (
@@ -39,12 +42,16 @@ const JobListing = ({ entity, jobs, path }) => {
         {jobs.map((job) => {
           const {
             agency,
+            agency_acronym: agencyAcronym,
             job_id: jobId,
             business_title: businessTitle,
             division_work_unit: divisionWorkUnit,
           } = job;
 
-          let subTitle = `${agency} / ${divisionWorkUnit}`;
+          let agencyString = agency;
+          if (agencyAcronym) agencyString = `${agencyString} (${agencyAcronym})`;
+
+          let subTitle = `${agencyString} / ${divisionWorkUnit}`;
           if (path === 'Agency') subTitle = divisionWorkUnit;
 
           return (

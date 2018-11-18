@@ -29,7 +29,7 @@ const agencies = [
   {
     id: 'DEPT OF INFO TECH & TELECOMM',
     displayName: 'Department of Information Technology and Telecommunications',
-    acronym: 'DOITT'
+    acronym: 'DOITT',
   },
   {
     id: 'DEPARTMENT OF TRANSPORTATION',
@@ -39,7 +39,7 @@ const agencies = [
   {
     id: 'ADMIN FOR CHILDREN\'S SVCS',
     displayName: 'Administration for Children\'s Services',
-    acronym: 'ACS'
+    acronym: 'ACS',
   },
   {
     id: 'DEPT OF DESIGN & CONSTRUCTION',
@@ -49,6 +49,7 @@ const agencies = [
   {
     id: 'NYC HOUSING AUTHORITY',
     displayName: 'Housing Authority',
+    acronym: 'NYCHA',
   },
   {
     id: 'DEPARTMENT OF INVESTIGATION',
@@ -57,7 +58,7 @@ const agencies = [
   {
     id: 'HOUSING PRESERVATION & DVLPMNT',
     displayName: 'Department of Housing Preservation & Development',
-    acronym: 'HPD'
+    acronym: 'HPD',
   },
   {
     id: 'DEPT OF CITYWIDE ADMIN SVCS',
@@ -121,7 +122,7 @@ const agencies = [
   {
     id: 'DEPARTMENT OF CORRECTION',
     displayName: 'Department of Correction',
-    acronym: 'DOC'
+    acronym: 'DOC',
   },
   {
     id: 'FIRE DEPARTMENT',
@@ -146,7 +147,7 @@ const agencies = [
   {
     id: 'DEPARTMENT OF BUILDINGS',
     displayName: 'Department of Buildings',
-    acronym: 'DOB'
+    acronym: 'DOB',
   },
   {
     id: 'FINANCIAL INFO SVCS AGENCY',
@@ -172,7 +173,7 @@ const agencies = [
   {
     id: 'CONFLICTS OF INTEREST BOARD',
     displayName: 'Conflicts of Interest Board',
-    acronym: 'COIB'
+    acronym: 'COIB',
   },
   {
     id: 'TAX COMMISSION',
@@ -234,12 +235,10 @@ const agencies = [
   },
   {
     id: 'MANHATTAN COMMUNITY BOARD #10',
-    displayName: 'Manhattan Community Board 10'
+    displayName: 'Manhattan Community Board 10',
   },
 ];
 
-const agencyLookup = (id) => {
-  return agencies.find((agency) => agency.id === id);
-}
+const agencyLookup = id => agencies.find(agency => agency.id === id);
 
 module.exports = agencyLookup;
