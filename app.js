@@ -41,6 +41,10 @@ app.get('/category/*', (req, res) => {
   res.sendfile(path.join(__dirname, 'public/category', 'index.html'));
 });
 
+app.get('/job/*', (req, res) => {
+  res.sendfile(path.join(__dirname, 'public/job', 'index.html'));
+});
+
 // // catch 404 and forward to error handler
 // app.use(function(req, res, next) {
 //   var err = new Error('Not Found');
