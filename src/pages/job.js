@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'gatsby';
+import Helmet from 'react-helmet';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
@@ -81,6 +82,12 @@ Error:
 
     return (
       <div>
+        <Helmet
+          title={`NYC Civic Jobs - ${businessTitle} at ${subTitle}`}
+          meta={[
+            { name: 'og:description', content: `${jobDescription.substring(0, 300)}...` },
+          ]}
+        />
         <div>
           <nav aria-label="breadcrumb">
             <ol className="breadcrumb">

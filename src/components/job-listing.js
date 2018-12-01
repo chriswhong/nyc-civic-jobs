@@ -1,4 +1,5 @@
 import React from 'react';
+import Helmet from 'react-helmet';
 import { Link } from 'gatsby';
 
 import JobDetails from './job-details';
@@ -21,6 +22,12 @@ const JobListing = ({ entity, jobs, path }) => {
 
   return (
     <div>
+      <Helmet
+        title={`NYC Civic Jobs - ${title}`}
+        meta={[
+          { name: 'og:description', content: title },
+        ]}
+      />
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
           <li className="breadcrumb-item"><Link to="/">Home</Link></li>

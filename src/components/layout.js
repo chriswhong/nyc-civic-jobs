@@ -56,8 +56,8 @@ export default class Layout extends React.Component {
             <Helmet
               title={data.site.siteMetadata.title}
               meta={[
-                { name: 'description', content: 'Sample' },
-                { name: 'keywords', content: 'sample, something' },
+                { name: 'og:description', content: 'NYC Civic Jobs, a simple site for browsing NYC Government Jobs' },
+                { name: 'keywords', content: 'civic, jobs, job listings, employment, hiring' },
               ]}
             >
               <link
