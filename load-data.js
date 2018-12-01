@@ -37,6 +37,7 @@ const replaceOddCharacters = string => string
   const jobsWithAgencyData = cleanJSON.map((job) => {
     const { agency, job_category } = job;
 
+    console.log(agency);
     const { displayName, acronym } = agencyLookup(agency);
     job.agency_id = slugify(displayName, { remove: /[*+~.()'"!:@,]/g }).toLowerCase();
     job.agency = displayName;
@@ -54,7 +55,7 @@ const replaceOddCharacters = string => string
     return job;
   });
 
-  console.log(jobsWithAgencyData, dataUpdatedAt)
+  console.log(jobsWithAgencyData, dataUpdatedAt);
 
   // make a connection
   mongoose.connect(process.env.MONGO_URI);
@@ -86,10 +87,13 @@ const replaceOddCharacters = string => string
     const Meta = mongoose
       .model('Meta', mongoose.Schema({ dataUpdatedAt: String }), 'meta');
 
-    Meta.create({ dataUpdatedAt }, function (err, small) {
-      if (err) return handleError(err);
-      console.log('Saved Metadata!');
+    Meta.deleteMany({}, () => {
+      console.log('Deleted all documents in Collection');
+
+      Meta.create({ dataUpdatedAt }, (err) => {
+        if (err) return handleError(err);
+        console.log('Saved Metadata!'); // eslint-disable-line
+      });
     });
   });
-
 })();
