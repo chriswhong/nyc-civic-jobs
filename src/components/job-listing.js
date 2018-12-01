@@ -25,6 +25,7 @@ const JobListing = ({ entity, jobs, path }) => {
       <Helmet
         title={`NYC Civic Jobs - ${title}`}
         meta={[
+          { name: 'twitter:card', content: title },
           { name: 'og:description', content: title },
         ]}
       />

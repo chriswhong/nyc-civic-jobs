@@ -85,6 +85,7 @@ Error:
         <Helmet
           title={`NYC Civic Jobs - ${businessTitle} at ${subTitle}`}
           meta={[
+            { name: 'twitter:card', content: `NYC Civic Jobs - ${businessTitle} at ${subTitle}` },
             { name: 'og:description', content: `${jobDescription.substring(0, 300)}...` },
           ]}
         />
