@@ -237,6 +237,19 @@ const agencies = [
     id: 'MANHATTAN COMMUNITY BOARD #10',
     displayName: 'Manhattan Community Board 10',
   },
+  {
+    id: 'DEPT OF RECORDS & INFO SERVICE',
+    displayName: 'Department of Records and Information Services',
+    acronym: 'DORIS',
+  },
+  {
+    id: 'NYC FIRE PENSION FUND',
+    displayName: 'Fire Pension Fund',
+  },
+  {
+    id: 'TEACHERS RETIREMENT SYSTEM',
+    displayName: 'Teachers\' Retirement System',
+  },
 ];
 
 const agencyLookup = id => agencies.find(agency => agency.id === id);
