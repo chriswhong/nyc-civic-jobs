@@ -250,6 +250,10 @@ const agencies = [
     id: 'TEACHERS RETIREMENT SYSTEM',
     displayName: 'Teachers\' Retirement System',
   },
+  {
+    id: 'EQUAL EMPLOY PRACTICES COMM',
+    displayName: 'Equal Employment Practices Commission',
+  },
 ];
 
 const agencyLookup = id => agencies.find(agency => agency.id === id);
