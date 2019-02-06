@@ -254,6 +254,14 @@ const agencies = [
     id: 'EQUAL EMPLOY PRACTICES COMM',
     displayName: 'Equal Employment Practices Commission',
   },
+  {
+    id: 'NYC POLICE PENSION FUND',
+    displayName: 'Police Pension Fund',
+  },
+  {
+    id: 'DEPT. OF HOMELESS SERVICES',
+    displayName: 'Department of Homeless Services',
+  },
 ];
 
 const agencyLookup = id => agencies.find(agency => agency.id === id);

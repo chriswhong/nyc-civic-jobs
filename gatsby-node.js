@@ -21,8 +21,11 @@ exports.onCreatePage = async ({ page, actions }) => {
 
   if (page.path.match(/^\/job/)) {
     page.matchPath = '/job/*';
-    console.log('MATCHES');
     // Update the page.
     createPage(page);
   }
+};
+
+exports.onPreBootstrap = () => {
+  require('isomorphic-fetch'); // eslint-disable-line
 };

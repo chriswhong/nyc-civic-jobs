@@ -35,6 +35,7 @@
     "gatsby-source-filesystem": "^2.0.4",
     "gatsby-transformer-sharp": "^2.1.4",
     "i": "^0.3.6",
+    "isomorphic-fetch": "^2.2.1",
     "jade": "~1.11.0",
     "moment": "^2.22.2",
     "mongoose": "^5.3.11",
