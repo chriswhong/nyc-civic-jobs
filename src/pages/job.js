@@ -65,18 +65,13 @@ Error:
 
     const {
       agency,
-      job_id: jobId,
-      business_title: businessTitle,
-      // job_category_ids: jobCategoryIds,
-      // posting_date: postingDate,
-      // salary_range_from: salaryRangeFrom,
-      // salary_range_to: salaryRangeTo,
-      job_description: jobDescription,
-      // salary_frequency: salaryFrequency,
-      division_work_unit: divisionWorkUnit,
+      jobId,
+      businessTitle,
+      workUnit,
+      content,
     } = job;
 
-    const subTitle = `${agency} / ${divisionWorkUnit}`;
+    const subTitle = `${agency} / ${workUnit}`;
 
     const url = `https://a127-jobs.nyc.gov/psc/nycjobs/EMPLOYEE/HRMS/c/HRS_HRAM.HRS_APP_SCHJOB.GBL?Page=HRS_APP_JBPST&Action=U&FOCUS=Applicant&SiteId=1&JobOpeningId=${jobId}&PostingSeq=1`;
 
@@ -86,7 +81,7 @@ Error:
           title={`NYC Civic Jobs - ${businessTitle} at ${subTitle}`}
           meta={[
             { name: 'twitter:card', content: `NYC Civic Jobs - ${businessTitle} at ${subTitle}` },
-            { name: 'og:description', content: `${jobDescription.substring(0, 300)}...` },
+            { name: 'og:description', content: 'View this job...' },
           ]}
         />
         <div>
@@ -106,13 +101,12 @@ Error:
               <div className="division">
                 {subTitle}
               </div>
+              <div className="content" dangerouslySetInnerHTML={{ __html: content }}/>
             </div>
             <div className="col-md-4 col-sm-12">
               <JobDetails {...job} />
             </div>
           </div>
-          <h5>Job Description</h5>
-          <p>{jobDescription}</p>
           <a href={url} target="_blank" rel="noopener noreferrer">
             <button type="button" className="btn btn-secondary btn-sm">
               View the Offical NYC Listing To Apply

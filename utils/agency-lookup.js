@@ -223,7 +223,7 @@ const agencies = [
   },
   {
     id: 'PUBLIC ADMINISTRATOR-NEW YORK',
-    displayName: 'Public Administrator',
+    displayName: 'Manhattan Public Administrator',
   },
   {
     id: 'BOROUGH PRESIDENT-QUEENS',
@@ -261,6 +261,14 @@ const agencies = [
   {
     id: 'DEPT. OF HOMELESS SERVICES',
     displayName: 'Department of Homeless Services',
+  },
+  {
+    id: 'PUBLIC ADMINISTRATOR-BRONX',
+    displayName: 'Bronx Public Administrator',
+  },
+  {
+    id: 'MUNICIPAL WATER FIN AUTHORITY',
+    displayName: 'Municipal Water Finance Authority',
   },
 ];
 

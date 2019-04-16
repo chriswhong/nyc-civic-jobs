@@ -18,12 +18,12 @@ library.add(faMoneyBillWave, faClock, faTags, faMapMarkerAlt);
 const formatCurrency = number => numeral(number).format('($0a)');
 
 const JobDetails = ({
-  job_category_ids: jobCategoryIds,
-  posting_date: postingDate,
-  salary_range_from: salaryRangeFrom,
-  salary_range_to: salaryRangeTo,
-  salary_frequency: salaryFrequency,
-  work_location: workLocation,
+  jobCategoryIds,
+  postingDate,
+  salaryLow,
+  salaryHigh,
+  salaryType,
+  workLocation,
 }) => {
   const dateString = moment(postingDate).fromNow();
 
@@ -44,14 +44,14 @@ const JobDetails = ({
       <li>
         <FontAwesomeIcon icon="money-bill-wave" />
         <small>
-          {formatCurrency(salaryRangeFrom)}
+          {formatCurrency(salaryLow)}
           {' '}
           -
           {' '}
-          {formatCurrency(salaryRangeTo)}
+          {formatCurrency(salaryHigh)}
           {' '}
           (
-          {salaryFrequency}
+          {salaryType}
           )
         </small>
       </li>

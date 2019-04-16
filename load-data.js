@@ -35,7 +35,10 @@ const replaceOddCharacters = string => string
 
   // add clean agency_id to each record
   const jobsWithAgencyData = cleanJSON.map((job) => {
+    console.log(job)
     const { agency, job_category } = job;
+
+    job.job_description = job.job_description || 'No Description'
 
     console.log(agency);
     const { displayName, acronym } = agencyLookup(agency);

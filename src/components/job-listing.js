@@ -49,17 +49,17 @@ const JobListing = ({ entity, jobs, path }) => {
         {jobs.map((job) => {
           const {
             agency,
-            agency_acronym: agencyAcronym,
-            job_id: jobId,
-            business_title: businessTitle,
-            division_work_unit: divisionWorkUnit,
+            agencyAcronym,
+            jobId,
+            businessTitle,
+            workUnit,
           } = job;
 
           let agencyString = agency;
           if (agencyAcronym) agencyString = `${agencyString} (${agencyAcronym})`;
 
-          let subTitle = `${agencyString} / ${divisionWorkUnit}`;
-          if (path === 'Agency') subTitle = divisionWorkUnit;
+          let subTitle = `${agencyString} / ${workUnit}`;
+          if (path === 'Agency') subTitle = workUnit;
 
           return (
             <div key={jobId} className="list-group-item">

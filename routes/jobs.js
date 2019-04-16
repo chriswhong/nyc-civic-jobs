@@ -7,34 +7,31 @@ const jobSchema = require('../schema/job');
 const { LookupCategoryDisplayName } = require('../utils/process-categories');
 
 // fields to return
-const fields = 'job_id agency agency_id agency_acronym business_title division_work_unit job_category_ids posting_date salary_range_from salary_range_to salary_frequency job_description work_location';
+const fields = 'jobId agency agencyId agencyAcronym businessTitle workUnit jobCategoryIds postingDate salaryLow salaryHigh salaryType workLocation';
 
 const Job = mongoose.model('Job', jobSchema);
 const Meta = mongoose.model('Meta', mongoose.Schema({ dataUpdatedAt: String }), 'meta');
 
-const posting_type = 'External';
 
 // get counts by agency and category
 router.get('/', (req, res, next) => {
   const promises = [
     Job.aggregate([
-      { $match: { posting_type } },
       {
         $group: {
-          _id: '$agency_id', // $region is the column name in collection
+          _id: '$agencyId', // $region is the column name in collection
           displayName: { $first: '$agency' },
-          acronym: { $first: '$agency_acronym'},
+          acronym: { $first: '$agencyAcronym' },
           count: { $sum: 1 },
         },
       },
       { $sort: { count: -1 } },
     ]).exec(),
     Job.aggregate([
-      { $match: { posting_type } },
-      { $unwind: '$job_category_ids' },
+      { $unwind: '$jobCategoryIds' },
       {
         $group: {
-          _id: '$job_category_ids', // $region is the column name in collection
+          _id: '$jobCategoryIds', // $region is the column name in collection
           count: { $sum: 1 },
         },
       },
@@ -61,10 +58,10 @@ router.get('/', (req, res, next) => {
 });
 
 // get jobs by agency
-router.get('/agency/:agency_id', (req, res, next) => {
-  const { agency_id } = req.params;
+router.get('/agency/:agencyId', (req, res, next) => {
+  const { agencyId } = req.params;
 
-  Job.find({ agency_id, posting_type }, fields, { sort: { posting_date: 'desc' } }, (err, jobs) => {
+  Job.find({ agencyId }, fields, { sort: { postingDate: 'desc' } }, (err, jobs) => {
     if (err) return handleError(err);
 
     res.send(jobs);
@@ -72,10 +69,10 @@ router.get('/agency/:agency_id', (req, res, next) => {
 });
 
 // get jobs by category
-router.get('/category/:category_id', (req, res, next) => {
-  const { category_id } = req.params;
+router.get('/category/:categoryId', (req, res, next) => {
+  const { categoryId } = req.params;
 
-  Job.find({ job_category_ids: category_id, posting_type }, fields, { sort: { posting_date: 'desc' } }, (err, jobs) => {
+  Job.find({ jobCategoryIds: categoryId }, fields, { sort: { postingDate: 'desc' } }, (err, jobs) => {
     if (err) return handleError(err);
 
     res.send(jobs);
@@ -83,10 +80,10 @@ router.get('/category/:category_id', (req, res, next) => {
 });
 
 // get one job
-router.get('/id/:job_id', (req, res, next) => {
-  const { job_id } = req.params;
+router.get('/id/:jobId', (req, res, next) => {
+  const { jobId } = req.params;
 
-  Job.findOne({ job_id }, fields, (err, job) => {
+  Job.findOne({ jobId }, `${fields} content`, (err, job) => {
     if (err) return handleError(err);
 
     res.send(job);
@@ -96,7 +93,6 @@ router.get('/id/:job_id', (req, res, next) => {
 // get one job
 router.get('/meta', (req, res, next) => {
   const { job_id } = req.params;
-  console.log('hi')
 
   Meta.findOne({}, 'dataUpdatedAt', (err, meta) => {
     if (err) return handleError(err);
