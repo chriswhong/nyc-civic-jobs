@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 
 const jobSchema = require('../schema/job');
 const { LookupCategoryDisplayName } = require('../utils/process-categories');
+const agencyLookup = require('../utils/agency-lookup');
 
 // fields to return
 const fields = 'jobId agency agencyId agencyAcronym businessTitle workUnit jobCategoryIds postingDate salaryLow salaryHigh salaryType workLocation';
@@ -46,6 +47,25 @@ router.get('/', (req, res, next) => {
       return {
         _id,
         displayName,
+        count,
+      };
+    });
+
+    // lookup and append agencyLogo to each agency
+    agencies = agencies.map(({
+      _id,
+      displayName,
+      acronym,
+      count,
+    }) => {
+
+      const logo = agencyLookup(_id);
+
+      return {
+        _id,
+        displayName,
+        acronym,
+        logo,
         count,
       };
     });

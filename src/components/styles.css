@@ -75,3 +75,11 @@ button, .badge {
   float: right;
   padding-top: 46px;
 }
+
+.agency-logo {
+  height: 30px;
+  width: 60px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}

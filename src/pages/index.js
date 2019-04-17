@@ -65,6 +65,8 @@ export default class IndexPage extends React.Component {
         return displayNameMatch || acronymMatch;
       });
 
+    console.log(filteredAgencies);
+
     const filteredCategories = categories
       .filter(category => category.displayName.toLowerCase().includes(categoryFilter));
 
@@ -113,11 +115,9 @@ This site was built with &nbsp;
             <ul className="list-group">
               {filteredAgencies.map(agency => (
 
-                <Link to={`agency/${agency._id}`} key={agency._id} className="list-group-item list-group-item-action">
-                  {agency.displayName}
-                  <span className="badge badge-primary badge-pill float-right">{agency.count}</span>
-                  &nbsp;
-                  <div className="badge">{agency.acronym}</div>
+                <Link to={`agency/${agency._id}`} key={agency._id} className="list-group-item list-group-item-action d-flex flex-row align-items-center">
+                  <div className="agency-logo" style={{ backgroundImage: `url(${agency.logo})` }} />{agency.displayName}
+                  <span className="badge badge-primary badge-pill">{agency.count}</span>
                 </Link>
 
               ))}
